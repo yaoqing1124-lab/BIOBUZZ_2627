@@ -1,11 +1,120 @@
 package org.firstinspires.ftc.teamcode.pedro;
 
+import com.pedropathing.algorithm.Foresight;
+import com.pedropathing.algorithm.ForesightConfig;
+import com.pedropathing.controllers.Controller;
 import com.pedropathing.follower.Follower;
+import com.pedropathing.math.Matrix;
+import com.pedropathing.math.Vector2D;
+import com.pedropathing.revhub.drivetrains.CoaxialPod;
+import com.pedropathing.revhub.drivetrains.CoaxialPodConfig;
+import com.pedropathing.revhub.drivetrains.Swerve;
+import com.pedropathing.revhub.drivetrains.SwerveConfig;
+import com.pedropathing.revhub.localizers.PinpointConfig;
+import com.pedropathing.revhub.localizers.PinpointLocalizer;
+import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-
 public class Constants {
+    public static CoaxialPodConfig leftFront = new CoaxialPodConfig(
+            c -> {
+                c.name.set("leftFront");
+                c.motorName.set("lf");
+                c.servoName.set("lfTurn");
+                c.servoEncoderName.set("lfTurnEncoder");
+                c.turnController.set(Controller.pid(0.3, 0, 0.0086)
+                        .plus(Controller.proportionalFeedforward(0.0130)));
+                c.driveDirection.set(DcMotorSimple.Direction.REVERSE);
+                c.servoDirection.set(DcMotorSimple.Direction.FORWARD);
+                c.angleOffsetRad.set(Math.toRadians(0));
+                c.podOffset.set(Vector2D.cartesian(-6, 6));
+            }
+    );
+    public static CoaxialPodConfig rightFront = new CoaxialPodConfig(
+            c -> {
+                c.name.set("rightFront");
+                c.motorName.set("rf");
+                c.servoName.set("rfTurn");
+                c.servoEncoderName.set("rfTurnEncoder");
+                c.turnController.set(Controller.pid(0.3, 0, 0.0086)
+                        .plus(Controller.proportionalFeedforward(0.0130)));
+                c.driveDirection.set(DcMotorSimple.Direction.FORWARD);
+                c.servoDirection.set(DcMotorSimple.Direction.FORWARD);
+                c.angleOffsetRad.set(Math.toRadians(0));
+                c.podOffset.set(Vector2D.cartesian(6, 6));
+            }
+    );
+    public static CoaxialPodConfig leftBack = new CoaxialPodConfig(
+            c -> {
+                c.name.set("leftBack");
+                c.motorName.set("lb");
+                c.servoName.set("lbTurn");
+                c.servoEncoderName.set("lbTurnEncoder");
+                c.turnController.set(Controller.pid(0.3, 0, 0.0086)
+                        .plus(Controller.proportionalFeedforward(0.0190)));
+                c.driveDirection.set(DcMotorSimple.Direction.REVERSE);
+                c.servoDirection.set(DcMotorSimple.Direction.FORWARD);
+                c.angleOffsetRad.set(Math.toRadians(0));
+                c.podOffset.set(Vector2D.cartesian(-6, -6));
+            }
+    );
+    public static CoaxialPodConfig rightBack = new CoaxialPodConfig(
+            c -> {
+                c.name.set("rightBack");
+                c.motorName.set("rb");
+                c.servoName.set("rbTurn");
+                c.servoEncoderName.set("rbTurnEncoder");
+                c.turnController.set(Controller.pid(0.3, 0, 0.0086)
+                        .plus(Controller.proportionalFeedforward(0.0190)));
+                c.driveDirection.set(DcMotorSimple.Direction.FORWARD);
+                c.servoDirection.set(DcMotorSimple.Direction.FORWARD);
+                c.angleOffsetRad.set(Math.toRadians(0));
+                c.podOffset.set(Vector2D.cartesian(6, -6));
+            }
+    );
+    public static SwerveConfig driveConfig = new SwerveConfig(
+            c -> {
+                c.zeroPowerBehavior.set(SwerveConfig.ZeroPowerBehavior.X_LOCK);
+                c.manualBrakeMode.set(true);
+                c.voltageCompensation.set(false);
+            }
+    );
+
+    public static PinpointConfig localizerConfig = new PinpointConfig(
+            c -> {
+                c.name.set("pinpoint");
+                c.xPodOffset.set(2.187);
+                c.yPodOffset.set(-4.572);
+                c.xPodDirection.set(GoBildaPinpointDriver.EncoderDirection.FORWARD);
+                c.yPodDirection.set(GoBildaPinpointDriver.EncoderDirection.FORWARD);
+            }
+    );
+    public static ForesightConfig foresightConfig = new ForesightConfig(
+            c -> {
+                Controller primaryTranslationalForward = Controller.proportional(0.3);
+                Controller secondaryTranslationalForward = Controller.proportional(0.1);
+                Controller primaryTranslationalLateral = Controller.proportional(0.3);
+                Controller secondaryTranslationalLateral = Controller.proportional(0.1);
+                c.forwardTranslational.set(Controller.piecewise(secondaryTranslationalForward).put(2.5, primaryTranslationalForward));
+                c.strafeTranslational.set(Controller.piecewise(secondaryTranslationalLateral).put(2.5, primaryTranslationalLateral));
+                c.coast.set(Controller.proportionalFeedforward(0.010978350889324107));
+                c.brake.set(Controller.proportionalFeedforward(0.008731598255925491));
+                c.headingFeedback.set(Controller.proportional(5.258721785960744));
+                c.headingBrakeCoefficients.set(Vector2D.cartesian(0.05642143125655298, 0.0063829525363003695));
+                c.linearBrakeCoefficients.set(Matrix.diag(0.10605894992901523, 0.08719146175596092));
+                c.quadraticBrakeCoefficients.set(Matrix.diag(0.0014663966976606565, 0.0013837064502458813));
+                c.maxAchievableForwardVelocity.set(72.72923108818539);
+                c.maxAchievableStrafeVelocity.set(52.34323936525474);
+                c.naturalForwardDeceleration.set(85.01144677379789);
+                c.naturalStrafeDeceleration.set(104.49787535782846);
+            }
+    );
     public static Follower create(HardwareMap h) {
-        // return new Follower(Drivetrain, Localizer, Foresight);
-        return null;
+        CoaxialPod leftFrontPod = new CoaxialPod(h, leftFront);
+        CoaxialPod rightFrontPod = new CoaxialPod(h, rightFront);
+        CoaxialPod leftBackPod = new CoaxialPod(h, leftBack);
+        CoaxialPod rightBackPod = new CoaxialPod(h, rightBack);
+        return new Follower(new PinpointLocalizer(h, localizerConfig), new Swerve(h, driveConfig,
+                leftBackPod, leftFrontPod, rightBackPod, rightFrontPod), new Foresight(foresightConfig));
     }
 }
