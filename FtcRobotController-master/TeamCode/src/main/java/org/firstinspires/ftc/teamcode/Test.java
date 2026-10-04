@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Shooter.Shooter;
+import org.firstinspires.ftc.teamcode.Shooter.ShooterPose;
 
 @TeleOp
 public class Test extends OpMode {
@@ -13,7 +14,7 @@ public class Test extends OpMode {
 
     @Override
     public void init() {
-        shooter = new Shooter();
+        shooter = new Shooter(new ShooterPose());
         intake = new Intake();
         trigger = new Trigger();
     }

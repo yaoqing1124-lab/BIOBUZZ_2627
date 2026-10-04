@@ -13,9 +13,23 @@ public class ShooterCalculator {
     }
 
     /**
+     * rpm 轉換 encoder ticks 每秒
+     */
+    public static double RPMToTicksPerSec(double rpm){
+        return ;
+    }
+
+    /**
      * RPM轉換離開初速度
      */
     public static double RPMToVelocity(double rpm){
+        return ;
+    }
+
+    /**
+     *  初速度轉換馬達RPM
+     */
+    public static double VelocityToRPM(double velocity){
         return ;
     }
 
