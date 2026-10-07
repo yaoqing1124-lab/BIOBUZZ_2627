@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Shooter
+package org.firstinspires.ftc.teamcode.Shooter;
 
 public class ShooterCalculator {
     // ================

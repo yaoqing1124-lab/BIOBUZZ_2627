@@ -2,27 +2,25 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.Shooter.Shooter;
 import org.firstinspires.ftc.teamcode.Shooter.ShooterPose;
 
 @TeleOp
 public class Test extends OpMode {
-    Shooter shooter;
-    Intake intake;
-    Trigger trigger;
-
+    DcMotor up, down;
     @Override
     public void init() {
-        shooter = new Shooter(new ShooterPose());
-        intake = new Intake();
-        trigger = new Trigger();
+        up = hardwareMap.get(DcMotorEx.class, "lf");
+        down = hardwareMap.get(DcMotorEx.class, "lb");
     }
 
     @Override
     public void loop() {
-        shooter.update();
-        intake.update();
-        trigger.update();
+        down.setPower(1);
+        up.setPower(gamepad1.circle ? 1 : -1);
     }
 }

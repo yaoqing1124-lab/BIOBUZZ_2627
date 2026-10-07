@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.pedroPathing;
+package org.firstinspires.ftc.teamcode._2627.pedroPathing;
 
 import com.pedropathing.control.FilteredPIDFCoefficients;
 import com.pedropathing.control.PIDFCoefficients;
@@ -13,6 +13,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+import org.firstinspires.ftc.teamcode._2627.config.Config;
 
 public class Constants {
     public static FollowerConstants followerConstants = new FollowerConstants()
@@ -38,14 +39,14 @@ public class Constants {
             .useBrakeModeInTeleOp(false);
 
     public static PinpointConstants localizerConstants = new PinpointConstants()
-            .forwardPodY(-12.75 / 2.54)
-            .strafePodX(-12.3 / 2.54)
+            .forwardPodY(Config.Sensor.pinpoint.offsetY)
+            .strafePodX(Config.Sensor.pinpoint.offsetX)
             .distanceUnit(DistanceUnit.INCH)
-            .hardwareMapName("pinpoint")
+            .hardwareMapName(Config.Sensor.pinpoint.id)
             .yawScalar(1.0)
             .encoderResolution(GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_4_BAR_POD)
-            .forwardEncoderDirection(GoBildaPinpointDriver.EncoderDirection.REVERSED)
-            .strafeEncoderDirection(GoBildaPinpointDriver.EncoderDirection.FORWARD);
+            .forwardEncoderDirection(Config.Sensor.pinpoint.Ydirection)
+            .strafeEncoderDirection(Config.Sensor.pinpoint.Xdirection);
 
     public static PathConstraints pathConstraints = new PathConstraints(
             0.995,

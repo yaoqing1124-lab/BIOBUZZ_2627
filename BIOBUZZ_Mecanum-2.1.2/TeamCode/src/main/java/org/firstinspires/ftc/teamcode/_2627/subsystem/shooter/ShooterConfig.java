@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Shooter;
+package org.firstinspires.ftc.teamcode._2627.subsystem.shooter;
 
 public class ShooterConfig {
     // ================================
@@ -8,6 +8,7 @@ public class ShooterConfig {
     public final static double ENERGY_LOSS_RATE = 0; //能量損失率
     public final static double RPM_ERROR_THRESHOLD  = 0; //容忍誤差
     public final static double VELOCITY_OFFSET = 0; //手動轉速調整偏移量
+    public final static double INTAKE_INITIAL_VELOCITY_IN_PER_SEC = 0;
 
     // ================================
     // 物理常數
@@ -22,6 +23,7 @@ public class ShooterConfig {
     public final static double PPR = 28; //馬達ticks數
     public final static double GEAR_RATIO = 1; //馬達傳動比
     public final static double ELEVATION_ANGLE = 65; //仰角
+    public final static double SHOOTER_HEIGHT = 0; //機器發射器高度
 
     // ================================
     //場地常數
