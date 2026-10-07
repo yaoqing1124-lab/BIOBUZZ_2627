@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.teamcode._2627.config.Config;
 import org.firstinspires.ftc.teamcode._2627.config.MotorConfig;
 import org.firstinspires.ftc.teamcode._2627.config.ServoConfig;
 import org.firstinspires.ftc.teamcode.gc.op.OpBehavior;
@@ -42,11 +43,8 @@ public class Shooter extends OpBehavior {
 
     @Override
     public void Loop() {
-        if(isEnable){
-            updateFlyWheel();
-            updateYaw();
-        }
-
+        updateFlyWheel();
+        updateYaw();
     }
 
     @Override
@@ -92,6 +90,6 @@ public class Shooter extends OpBehavior {
         double robotY = Drivetrain.get_Follower().getPose().getY();
         double robotHeading = Drivetrain.get_Follower().getHeading();
         ShooterPose.set(robotX * Math.cos(robotHeading) - robotY * Math.sin(robotHeading),
-                robotX * Math.sin(robotHeading) + robotY * Math.cos(robotHeading), ShooterConfig.SHOOTER_HEIGHT);
+                robotX * Math.sin(robotHeading) + robotY * Math.cos(robotHeading), Config.ShooterConfig.SHOOTER_HEIGHT);
     }
 }

@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode._2627.subsystem.shooter;
 
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.teamcode._2627.config.Config;
+
 public class ShooterCalculator {
     // ================
     // 物理層轉換
@@ -11,10 +13,10 @@ public class ShooterCalculator {
      * encoder ticks 每秒轉換 rpm
      */
     public static double ticksPerSec2RPM(double ticksPerSec){
-        return (ticksPerSec / (ShooterConfig.PPR * ShooterConfig.GEAR_RATIO)) * 60.0;
+        return (ticksPerSec / (Config.ShooterConfig.PPR * Config.ShooterConfig.GEAR_RATIO)) * 60.0;
     }
     public static double RPM2ticksPerSec(double rpm){
-        return rpm / 60 * (ShooterConfig.PPR * ShooterConfig.GEAR_RATIO);
+        return rpm / 60 * (Config.ShooterConfig.PPR * Config.ShooterConfig.GEAR_RATIO);
     }
 
     /**
@@ -22,18 +24,18 @@ public class ShooterCalculator {
      */
     public static double RPM2Velocity(double rpm){
         double rps = rpm / 60.0;
-        double surfaceVelocity = rps * (2.0 * Math.PI * ShooterConfig.FLYWHEEL_RADIUS_IN);
+        double surfaceVelocity = rps * (2.0 * Math.PI * Config.ShooterConfig.FLYWHEEL_RADIUS_IN);
         double theoreticalExitVelocity = surfaceVelocity / 2.0;
-        return theoreticalExitVelocity * ShooterConfig.ENERGY_CONVERSION_RATE + ShooterConfig.INTAKE_INITIAL_VELOCITY_IN_PER_SEC;
+        return theoreticalExitVelocity * Config.ShooterConfig.ENERGY_CONVERSION_RATE + Config.ShooterConfig.INTAKE_INITIAL_VELOCITY_IN_PER_SEC;
     }
 
     /**
      *  初速度轉換馬達RPM
      */
     public static double Velocity2RPM(double velocity) {
-        double theoreticalExitVelocity = (velocity - ShooterConfig.INTAKE_INITIAL_VELOCITY_IN_PER_SEC) / ShooterConfig.ENERGY_CONVERSION_RATE;
+        double theoreticalExitVelocity = (velocity - Config.ShooterConfig.INTAKE_INITIAL_VELOCITY_IN_PER_SEC) / Config.ShooterConfig.ENERGY_CONVERSION_RATE;
         double requiredSurfaceVelocity = theoreticalExitVelocity * 2.0;
-        double rps = requiredSurfaceVelocity / (2.0 * Math.PI * ShooterConfig.FLYWHEEL_RADIUS_IN);
+        double rps = requiredSurfaceVelocity / (2.0 * Math.PI * Config.ShooterConfig.FLYWHEEL_RADIUS_IN);
         return rps * 60.0;
     }
 
@@ -42,28 +44,36 @@ public class ShooterCalculator {
     // ================
     // 運動學
     // ================
+
     /**
      * 計算飛行時間
      */
     public static double calculateFlyTime(ShooterPose current, ShooterPose target){
-        //TODO
-        return ;
+        return calculateDistance(current, target) / (calculateVelocity(current, target) * Math.cos(Config.ShooterConfig.ELEVATION_ANGLE));
+    }
+    /**
+     * 計算飛行距離
+     */
+    public static double calculateDistance(ShooterPose current, ShooterPose target){
+        return Math.hypot(current.x - target.x, current.y - current.y);
     }
 
     /**
      * 計算飛行高度
+     * 只能用在判斷當下出去的速度會不會碰到天花板
      */
-    public static double calculateMaxH(ShooterPose current, ShooterPose target){
-        //TODO
-        return ;
+    public static double calculateMaxH(double velocity){
+        return Math.pow(velocity * Math.sin(Config.ShooterConfig.ELEVATION_ANGLE), 2) / (2 * Config.ShooterConfig.G);
     }
 
     /**
      * 計算理想初速度
      */
     public static double calculateVelocity(ShooterPose current, ShooterPose target){
-        //TODO
-        return ;
+        double R = calculateDistance(current, target);
+        double H = Config.ShooterConfig.H;
+        return (R / Math.cos(Math.toRadians(Config.ShooterConfig.ELEVATION_ANGLE))) *
+                Math.sqrt(Config.ShooterConfig.G / (2 * R * Math.tan(Math.toRadians(Config.ShooterConfig.ELEVATION_ANGLE) - 2 * H)));
     }
 
     /**

@@ -3,11 +3,10 @@ package org.firstinspires.ftc.teamcode._2627.opmode;
 import com.pedropathing.paths.PathChain;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode._2627.subsystem.Drivetrain;
+import org.firstinspires.ftc.teamcode._2627.config.Config;
 import org.firstinspires.ftc.teamcode.gc.op.OpObject;
 import org.firstinspires.ftc.teamcode._2627.subsystem.Intake;
 import org.firstinspires.ftc.teamcode._2627.subsystem.shooter.Shooter;
-import org.firstinspires.ftc.teamcode._2627.subsystem.shooter.ShooterConfig;
 
 @TeleOp
 public class ManualControl extends OpObject {
@@ -29,12 +28,12 @@ public class ManualControl extends OpObject {
         }
         switch (team){
             case blue:
-                if(isLeft) Shooter.setTarget(ShooterConfig.BLUE_TARGET_L);
-                else       Shooter.setTarget(ShooterConfig.BLUE_TARGET_R);
+                if(isLeft) Shooter.setTarget(Config.ShooterConfig.BLUE_TARGET_L);
+                else       Shooter.setTarget(Config.ShooterConfig.BLUE_TARGET_R);
                 break;
             case red:
-                if(isLeft) Shooter.setTarget(ShooterConfig.RED_TARGET_L);
-                else       Shooter.setTarget(ShooterConfig.RED_TARGET_R);
+                if(isLeft) Shooter.setTarget(Config.ShooterConfig.RED_TARGET_L);
+                else       Shooter.setTarget(Config.ShooterConfig.RED_TARGET_R);
                 break;
         }
 
