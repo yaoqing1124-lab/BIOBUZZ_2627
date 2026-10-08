@@ -1,0 +1,75 @@
+package org.firstinspires.ftc.teamcode._2627.subsystem;
+
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+
+import org.firstinspires.ftc.teamcode._2627.config.Config;
+import org.firstinspires.ftc.teamcode.gc.op.OpBehavior;
+import org.firstinspires.ftc.teamcode.gc.op.OpObject;
+
+public class Intake extends OpBehavior {
+    DcMotorEx intake, controlIntake;
+
+    private Intake(){}
+    private final static Intake m_instance;
+    static {
+        m_instance = new Intake();
+        OpObject.RegisterGlobalBehavior(m_instance);
+    }
+    public enum Mode{
+        intake, shoot, brake;
+    }
+    private static Mode m_mode;
+
+    @Override
+    public void Init() {
+        intake = init(Config.Motor.intake.id, Config.Motor.intake.direction);
+        controlIntake = init(Config.Motor.intakeCtrl.id, Config.Motor.intakeCtrl.direction);
+        m_mode = Mode.brake;
+    }
+
+    @Override
+    public void Start() {
+    }
+
+    @Override
+    public void Loop() {
+        switch (m_mode){
+            case intake:
+                intake.setPower(Config.Tuning.intakePower);
+                controlIntake.setPower(Config.Tuning.intakePower);
+                break;
+            case shoot:
+                intake.setPower(Config.Tuning.intakePower);
+                controlIntake.setPower(-Config.Tuning.intakePower);
+                break;
+            case brake:
+                intake.setPower(0);
+                controlIntake.setPower(0);
+                break;
+        }
+    }
+
+    @Override
+    public void Stop() {
+        intake = null;
+        controlIntake = null;
+    }
+
+    private DcMotorEx init(String name,  DcMotorSimple.Direction direction){
+        DcMotorEx motor;
+        motor = m_object.hardwareMap.get(DcMotorEx.class, name);
+        motor.setDirection(direction);
+        motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motor.setPower(0);
+        return motor;
+    }
+    public static void setMode(Mode mode){
+        m_mode = mode;
+    }
+    public static Mode getMode(){
+        return m_mode;
+    }
+}

@@ -7,9 +7,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.teamcode._2627.config.Config;
 import org.firstinspires.ftc.teamcode._2627.config.MotorConfig;
 import org.firstinspires.ftc.teamcode._2627.config.ServoConfig;
+import org.firstinspires.ftc.teamcode._2627.subsystem.Drivetrain;
 import org.firstinspires.ftc.teamcode.gc.op.OpBehavior;
 import org.firstinspires.ftc.teamcode.gc.op.OpObject;
-import org.firstinspires.ftc.teamcode._2627.subsystem.Drivetrain;
 
 public class Shooter extends OpBehavior {
     private MotorConfig m_flywheelInfo;
