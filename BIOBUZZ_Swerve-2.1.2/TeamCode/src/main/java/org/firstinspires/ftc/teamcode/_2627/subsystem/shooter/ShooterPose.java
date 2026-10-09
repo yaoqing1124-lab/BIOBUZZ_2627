@@ -7,17 +7,11 @@ public class ShooterPose {
     public double yaw;
 
     public ShooterPose() {
-        this.x = 0;
-        this.y = 0;
-        this.z = 0;
-        this.yaw = 0;
+        this(0, 0, 0, 0);
     }
 
     public ShooterPose(double x, double y, double z) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        this.yaw = 0;
+        this(x, y, z, 0);
     }
 
     public ShooterPose(double x, double y, double z, double yaw) {
@@ -25,6 +19,20 @@ public class ShooterPose {
         this.y = y;
         this.z = z;
         this.yaw = yaw;
+    }
+
+    // 防禦性複製建構子
+    public ShooterPose(ShooterPose other) {
+        if (other != null) {
+            this.x = other.x;
+            this.y = other.y;
+            this.z = other.z;
+            this.yaw = other.yaw;
+        }
+    }
+
+    public ShooterPose copy() {
+        return new ShooterPose(this);
     }
 
     public void set(double x, double y, double z) {

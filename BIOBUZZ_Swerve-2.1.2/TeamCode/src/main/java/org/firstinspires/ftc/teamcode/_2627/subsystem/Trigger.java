@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode._2627.subsystem;
 
 import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.teamcode._2627.config.Config;
+import org.firstinspires.ftc.teamcode._2627.util.HardwareConfig;
 import org.firstinspires.ftc.teamcode.gc.op.OpBehavior;
 import org.firstinspires.ftc.teamcode.gc.op.OpObject;
 
@@ -17,7 +17,7 @@ public class Trigger extends OpBehavior {
 
     @Override
     public void Init() {
-        trig = m_object.hardwareMap.get(Servo.class, Config.Servo.trig.id);
+        trig = m_object.hardwareMap.get(Servo.class, HardwareConfig.Servo.trig.id);
     }
 
     @Override
@@ -29,13 +29,13 @@ public class Trigger extends OpBehavior {
     public void Loop() {
         switch (Intake.getMode()){
             case shoot:
-                trig.setPosition(Config.Tuning.TRIG_OPEN_POSITION);
+                trig.setPosition(0);
                 break;
             case intake:
-                trig.setPosition(Config.Tuning.TRIG_CLOSE_POSITION);
+                trig.setPosition(HardwareConfig.Tuning.TRIG_POSITION);
                 break;
             case brake:
-                trig.setPosition(Config.Tuning.TRIG_CLOSE_POSITION);
+                trig.setPosition(HardwareConfig.Tuning.TRIG_POSITION);
                 break;
         }
     }

@@ -28,6 +28,14 @@ public abstract class OpObject extends OpMode {
 
     @Override
     public final void init() {
+        try {
+            Class.forName("org.firstinspires.ftc.teamcode._2627.subsystem.Drivetrain");
+            Class.forName("org.firstinspires.ftc.teamcode._2627.subsystem.Intake");
+            Class.forName("org.firstinspires.ftc.teamcode._2627.subsystem.Trigger");
+            Class.forName("org.firstinspires.ftc.teamcode._2627.subsystem.shooter.Shooter");
+            Class.forName("org.firstinspires.ftc.teamcode.gc.utils.Debug");
+        } catch (ClassNotFoundException ignored) {}
+
         Init();
         for (OpBehavior behavior : m_behaviors) {
             behavior.Init();

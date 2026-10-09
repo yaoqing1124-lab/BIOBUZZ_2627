@@ -31,6 +31,8 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.AnalogInput;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.teamcode._2627.util.DriveConstants;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,10 +94,10 @@ public class Tuning extends SelectableOpMode {
     @Override
     public void onSelect() {
         if (follower == null) {
-            follower = SwerveConstants.createFollower(hardwareMap);
+            follower = DriveConstants.createFollower(hardwareMap);
             PanelsConfigurables.INSTANCE.refreshClass(this);
         } else {
-            follower = SwerveConstants.createFollower(hardwareMap);
+            follower = DriveConstants.createFollower(hardwareMap);
         }
 
         follower.setStartingPose(new Pose());
@@ -1428,7 +1430,7 @@ class Circle extends OpMode {
  */
 class AnalogMinMaxTuner extends OpMode {
     //populate the below with your names for the servos and encoders
-    public String[] encoderNames = {"leftFrontEncoder", "rightFrontEncoder", "leftBackEncoder", "rightBackEncoder"};
+    public String[] encoderNames = {"lfenc", "rfenc", "lbenc", "rbenc"};
     public AnalogInput[] encoders = new AnalogInput[encoderNames.length];
     public double[] minVoltages = new double[encoderNames.length];
     public double[] maxVoltages = new double[encoderNames.length];

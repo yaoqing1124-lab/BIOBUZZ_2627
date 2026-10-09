@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-import org.firstinspires.ftc.teamcode._2627.config.Config;
+import org.firstinspires.ftc.teamcode._2627.util.HardwareConfig;
 import org.firstinspires.ftc.teamcode.gc.op.OpBehavior;
 import org.firstinspires.ftc.teamcode.gc.op.OpObject;
 
@@ -24,8 +24,8 @@ public class Intake extends OpBehavior {
 
     @Override
     public void Init() {
-        intake = init(Config.Motor.intake.id, Config.Motor.intake.direction);
-        controlIntake = init(Config.Motor.intakeCtrl.id, Config.Motor.intakeCtrl.direction);
+        intake = init(HardwareConfig.Motor.intake.id, HardwareConfig.Motor.intake.direction);
+        controlIntake = init(HardwareConfig.Motor.intakeCtrl.id, HardwareConfig.Motor.intakeCtrl.direction);
         m_mode = Mode.brake;
     }
 
@@ -37,12 +37,12 @@ public class Intake extends OpBehavior {
     public void Loop() {
         switch (m_mode){
             case intake:
-                intake.setPower(Config.Tuning.intakePower);
-                controlIntake.setPower(Config.Tuning.intakePower);
+                intake.setPower(HardwareConfig.Tuning.intakePower);
+                controlIntake.setPower(HardwareConfig.Tuning.intakePower);
                 break;
             case shoot:
-                intake.setPower(Config.Tuning.intakePower);
-                controlIntake.setPower(-Config.Tuning.intakePower);
+                intake.setPower(HardwareConfig.Tuning.intakePower);
+                controlIntake.setPower(-HardwareConfig.Tuning.intakePower);
                 break;
             case brake:
                 intake.setPower(0);

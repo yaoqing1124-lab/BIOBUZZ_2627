@@ -31,7 +31,7 @@ public abstract class StateObject {
     }
 
     /** Add to nextStates and return the first one, allow to chain invoke */
-    public final StateObject Than(StateObject... state){
+    public final StateObject Then(StateObject... state){
         nextStates.addAll(List.of(state));
         return state[0];
     }

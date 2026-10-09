@@ -20,7 +20,6 @@ public class FollowPath extends StateObject {
 
     @Override
     public void Loop(double timestamp, double deltaTime) {
-        m_follower.update();
     }
 
     @Override
