@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-import org.firstinspires.ftc.teamcode._2627.util.HardwareConfig;
+import org.firstinspires.ftc.teamcode._2627.constants.HardwareConfig;
 import org.firstinspires.ftc.teamcode.gc.op.OpBehavior;
 import org.firstinspires.ftc.teamcode.gc.op.OpObject;
 

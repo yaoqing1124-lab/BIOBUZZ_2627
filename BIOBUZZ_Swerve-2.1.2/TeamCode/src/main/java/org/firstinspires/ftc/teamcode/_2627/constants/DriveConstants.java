@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode._2627.util;
+package org.firstinspires.ftc.teamcode._2627.constants;
 
 import com.bylazar.configurables.annotations.Configurable;
 import com.pedropathing.control.FilteredPIDFCoefficients;
@@ -7,6 +7,7 @@ import com.pedropathing.follower.Follower;
 import com.pedropathing.follower.FollowerConstants;
 import com.pedropathing.ftc.FollowerBuilder;
 import com.pedropathing.ftc.drivetrains.CoaxialPod;
+import com.pedropathing.ftc.drivetrains.MecanumConstants;
 import com.pedropathing.ftc.drivetrains.SwerveConstants;
 import com.pedropathing.ftc.localization.constants.PinpointConstants;
 import com.pedropathing.geometry.Pose;
@@ -16,6 +17,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+import org.firstinspires.ftc.teamcode._2627.subsystem.Drivetrain;
 
 @Configurable
 public class DriveConstants {
@@ -27,6 +29,19 @@ public class DriveConstants {
             .drivePIDFCoefficients(new FilteredPIDFCoefficients(0.03, 0, 0.0003, 0.6, 0.13))
             .centripetalScaling(0.00003).
             mass(13.732);
+
+    public static MecanumConstants driveConstants = new MecanumConstants()
+            .leftFrontMotorName(HardwareConfig.Motor.lfm.id)
+            .leftRearMotorName(HardwareConfig.Motor.lbm.id)
+            .rightFrontMotorName(HardwareConfig.Motor.rfm.id)
+            .rightRearMotorName(HardwareConfig.Motor.rbm.id)
+            .leftFrontMotorDirection(DcMotorSimple.Direction.FORWARD)
+            .leftRearMotorDirection(DcMotorSimple.Direction.FORWARD)
+            .rightFrontMotorDirection(DcMotorSimple.Direction.REVERSE)
+            .rightRearMotorDirection(DcMotorSimple.Direction.REVERSE)
+            .xVelocity(73.26)   //forward max power
+            .yVelocity(52.26)   // <-  max power
+            .useBrakeModeInTeleOp(false);
 
     public static PinpointConstants localizerConstants = new PinpointConstants()
             .forwardPodY(HardwareConfig.Sensor.pinpoint.offsetY / 25.4)
@@ -91,11 +106,32 @@ public class DriveConstants {
     public static PathConstraints pathConstraints = new PathConstraints(0.9, 2, 2,
             0.1, 30, 1, 10, 1);
 
+    public enum Type{
+        Mecanum, Swerve;
+    }
+    private static Type type;
+    public static void setDrive(Type type){
+        DriveConstants.type = type;
+    }
+
     public static Follower createFollower(HardwareMap hardwareMap) {
-        return new FollowerBuilder(followerConstants, hardwareMap).pathConstraints(pathConstraints)
-                .swerveDrivetrain(swerveConstants, leftFront(hardwareMap), rightFront(hardwareMap),
-                        leftBack(hardwareMap), rightBack(hardwareMap))
-                .pinpointLocalizer(localizerConstants)
-                .build();
+        if(type == null){
+            type = Type.Mecanum;
+        }
+        switch (type){
+            case Mecanum:
+                return new FollowerBuilder(followerConstants, hardwareMap)
+                        .mecanumDrivetrain(driveConstants)
+                        .pinpointLocalizer(localizerConstants)
+                        .pathConstraints(pathConstraints)
+                        .build();
+            case Swerve:
+                return new FollowerBuilder(followerConstants, hardwareMap).pathConstraints(pathConstraints)
+                        .swerveDrivetrain(swerveConstants, leftFront(hardwareMap), rightFront(hardwareMap),
+                                leftBack(hardwareMap), rightBack(hardwareMap))
+                        .pinpointLocalizer(localizerConstants)
+                        .build();
+        }
+        return null;
     }
 }

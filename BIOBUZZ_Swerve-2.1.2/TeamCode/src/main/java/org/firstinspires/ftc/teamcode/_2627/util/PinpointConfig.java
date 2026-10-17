@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode._2627.config;
+package org.firstinspires.ftc.teamcode._2627.util;
 
 import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
 

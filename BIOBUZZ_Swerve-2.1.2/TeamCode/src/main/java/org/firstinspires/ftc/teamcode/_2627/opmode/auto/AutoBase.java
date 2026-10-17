@@ -2,15 +2,12 @@ package org.firstinspires.ftc.teamcode._2627.opmode.auto;
 
 import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.Pose;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode._2627.util.HardwareConfig;
 import org.firstinspires.ftc.teamcode._2627.subsystem.Drivetrain;
-import org.firstinspires.ftc.teamcode._2627.util.PoseConfig;
+import org.firstinspires.ftc.teamcode._2627.constants.PoseConfig;
 import org.firstinspires.ftc.teamcode._2627.util.Team;
 import org.firstinspires.ftc.teamcode.gc.op.OpObject;
-import org.firstinspires.ftc.teamcode.gc.op.behavior.GenericBehavior;
 import org.firstinspires.ftc.teamcode.gc.op.behavior.statemachine.StateMachine;
 import org.firstinspires.ftc.teamcode.gc.op.behavior.statemachine.StateObject;
 

@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode._2627.opmode.auto;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
-import org.firstinspires.ftc.teamcode._2627.util.AutoConfig;
+import org.firstinspires.ftc.teamcode._2627.constants.AutoConfig;
 import org.firstinspires.ftc.teamcode._2627.state.FollowPath;
 import org.firstinspires.ftc.teamcode._2627.state.Shoot;
 import org.firstinspires.ftc.teamcode._2627.util.Team;

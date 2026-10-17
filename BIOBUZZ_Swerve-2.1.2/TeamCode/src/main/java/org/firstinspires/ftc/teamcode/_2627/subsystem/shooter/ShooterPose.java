@@ -47,4 +47,9 @@ public class ShooterPose {
         this.z = z;
         this.yaw = yaw;
     }
+
+    @Override
+    public String toString() {
+        return String.format("(%.1f, %.1f, %.1f)", x, y, z);
+    }
 }

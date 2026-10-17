@@ -31,7 +31,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.AnalogInput;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode._2627.util.DriveConstants;
+import org.firstinspires.ftc.teamcode._2627.constants.DriveConstants;
 
 import java.util.ArrayList;
 import java.util.List;

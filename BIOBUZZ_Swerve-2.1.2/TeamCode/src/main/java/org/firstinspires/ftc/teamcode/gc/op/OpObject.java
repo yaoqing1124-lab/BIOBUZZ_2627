@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.gc.op;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.teamcode._2627.util.Team;
+import org.firstinspires.ftc.teamcode.gc.utils.Debug;
 
 import java.util.HashSet;
 public abstract class OpObject extends OpMode {
@@ -28,6 +29,7 @@ public abstract class OpObject extends OpMode {
 
     @Override
     public final void init() {
+        Debug.Log("status : init");
         try {
             Class.forName("org.firstinspires.ftc.teamcode._2627.subsystem.Drivetrain");
             Class.forName("org.firstinspires.ftc.teamcode._2627.subsystem.Intake");
@@ -44,6 +46,7 @@ public abstract class OpObject extends OpMode {
             globalBehavior.m_object = this;
             globalBehavior.Init();
         }
+        Debug.Log("wait for start ...");
     }
 
     @Override
@@ -66,6 +69,7 @@ public abstract class OpObject extends OpMode {
         for (OpBehavior globalBehavior : s_globalBehaviors) {
             globalBehavior.Loop();
         }
+        s_globalBehaviors.forEach((behavior)  -> Debug.Log("register behavior", behavior.toString()));
     }
 
     @Override
